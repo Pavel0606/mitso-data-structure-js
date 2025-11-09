@@ -19,7 +19,26 @@ import { NotImplementedError } from '../extensions/index.js';
  * }
  */
 
-export default function removeKFromList(/* l, k */) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
+export default function removeKFromList(l, k) {
+  // Обрабатываем случай, когда список пустой
+  if (l === null) {
+    return null;
+  }
+
+  // Создаем фиктивную голову для упрощения обработки
+  let dummy = { value: 0, next: l };
+  let current = dummy;
+
+  // Проходим по списку
+  while (current.next !== null) {
+    if (current.next.value === k) {
+      // Пропускаем узел с нужным значением
+      current.next = current.next.next;
+    } else {
+      // Переходим к следующему узлу
+      current = current.next;
+    }
+  }
+
+  return dummy.next;
 }
